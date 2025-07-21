@@ -129,20 +129,59 @@ class PowerOfTwo{
 	}
 }
 
+//Qn 8
+
 class FirstSet {
     public static void main(String[] args) {
+        System.out.print("Program to find first set of bit of a number");
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter a number: ");
+		int count = 1;
         int num = scan.nextInt();
         if (num == 0) {
             System.out.println("No set bit is there");
         } else {
             int firstSetBit = num & -num;
-            System.out.println("First set bit value: " + firstSetBit);
+            while(firstSetBit>1){
+				firstSetBit = firstSetBit / 2;
+                count++;
+			}
+			System.out.println("First set bit position: " + count);
         }
         scan.close();
     }
 }
 
+//Qn 9
 
+class Employee{
+	int id;
+	String name;
+	String department;
+	int salary;
+	Employee(){};
+	Employee(int id,String name,String department, int salary){
+		this.id = id;
+		this.name = name;
+		this.department = department;
+		this.salary = salary;
+	}
+	public static void main(String[] args){
+		System.out.println("Program to print the Details of the Employee for two Employees\n");
+		Scanner scan = new Scanner(System.in);
+		Employee emp1 = new Employee(001,"Damon","MBBS",1_00_00_000);
+		Employee emp2 = new Employee(002,"Stefan","Arts",2_00_00_00);
+		System.out.println("First Employee Id Details : \nID: "+emp1.id+"\nName:"+emp1.name+"\nDepartment:"+emp1.department+"\nSalary:"+emp1.salary+"\n");
+		System.out.println("Second Employee Id Details : \nID: "+emp2.id+"\nName:"+emp2.name+"\nDepartment:"+emp2.department+"\nSalary:"+emp2.salary+"\n");
+	}
+}
 
+//Qn 10
+
+class InstanceOrNot{
+	public static void main(String[] args){
+		System.out.println("Program to check whether a object is Instance of a Class");
+		InstanceOrNot obj1 = new InstanceOrNot();
+		System.out.println(obj1 instanceof InstanceOrNot);
+	}
+}
