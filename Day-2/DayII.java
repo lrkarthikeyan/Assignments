@@ -171,47 +171,31 @@ class NumberTriangle {
 
 //Qn 3b
 
-class DiamondTriangle {
+class LeftTriangle {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Enter the rows you want to get the Diamond triangle : ");
-        int row = scan.nextInt();
         int i = 1;
-        while (i<=row){
-            int tempI = 0;
-            while (tempI<=row-i){
-                System.out.print(" ");
-                tempI++;
-            }
-            int j = 1;
-            while (j<=i){
+        while (i<=3) {
+            int j = 0;
+            while (j<i) {
                 System.out.print("w ");
                 j++;
             }
+            System.out.println();
             i++;
-            System.out.println();
         }
-        int downSideSize = i-2;
-        int forSpace = i-2;
-        int j = 1;
-        while (downSideSize>0){
-            int temp = forSpace;
-            while (temp<i){
-                System.out.print(" ");
-                temp++;
-            }
-            int tempJ = j;
-            while (tempJ<row){
+        int k = 2;
+        while (k>0) {
+            int j = 1;
+            while (j<=k) {
                 System.out.print("w ");
-                tempJ++;
+                j++;
             }
-            j++;
-            forSpace--;
-            downSideSize--;
             System.out.println();
+            k--;
         }
     }
 }
+
 
 
 //Qn 4a
