@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //Qn 1
 
@@ -103,75 +104,105 @@ class Vehicle {
 //Qn 5
 
 class Store {
-    static String storeName;
-    static String storeLocation;
-    ArrayList<Product> productsList;
 
-    Store(){
-        productsList = new ArrayList<>();
+    static String name;
+    static String location;
+    static ArrayList<Product> products = new ArrayList<>();
+
+    public static void setStoreDetails(String name,String location){
+        Store.name = name;
+        Store.location = location;
     }
 
-    public static void setStoreDetails(String storeName,String storeLocation) {
-        Store.storeLocation = storeLocation;
-        Store.storeName = storeName;
+    public static void addProductsToStore(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter the product name : ");
+        String name = scan.nextLine();
+        System.out.print("Enter product id : ");
+        int id = scan.nextInt();
+        System.out.print("Enter product price : ");
+        int price = scan.nextInt();
+        System.out.print("Enter product quantity : ");
+        int quantity = scan.nextInt();
+        products.add(new Product(id,name,price,quantity));
     }
-
-    public static void displayStoreDetails(){
-        System.out.println("Store name: "+storeName);
-        System.out.println("Store Location: "+storeLocation);
-    }
-
-    public void addProduct(Product product){
-        productsList.add(product);
-    }
-
-    public void displayAll(){
-        if(productsList.isEmpty()){
-            System.out.println("No products in the store");
+    public static void viewProducts() {
+        System.out.println("----------------------------------------");
+        System.out.println("Store Name : " + Store.name);
+        System.out.println("Store Location : " + Store.location);
+        if (Store.products.isEmpty()) {
+            System.out.println("----------------------------------------");
+            System.out.println("There ain't no products in the store right now");
+            System.out.println("----------------------------------------");
+        } else {
+            System.out.println("----------------------------------------");
+            System.out.printf("%-10s%-10s%-10s%-10s", "ID", "NAME", "PRICE", "QUANTITY");
+            System.out.println();
+            System.out.println("----------------------------------------");
+            for (Product pr : Store.products) {
+                System.out.printf("%-10d", pr.id);
+                System.out.printf("%-10s", pr.name);
+                System.out.printf("%-10d", pr.price);
+                System.out.printf("%-10d", pr.quantity);
+                System.out.println();
+            }System.out.println("----------------------------------------");
+            System.out.println("----------------------------------------");
         }
-        else{
-            System.out.println("Products in the store");
-            for(Product pr : productsList){
-                pr.displayAllProducts();
+    }
+    public static void showStoreDetails(){
+        System.out.println("----------------------------------------");
+        System.out.println("The Store is "+Store.name+" & the Location is "+Store.location);
+        System.out.println("----------------------------------------");
+    }
+}
+
+
+// product class
+
+class Product {
+    int id;
+    String name;
+    int price;
+    int quantity;
+
+    Product( int id,String name,int price,int quantity){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+
+//Main class
+
+
+class SimpleInventory extends Store{
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Set store name : ");
+        String name = scan.nextLine();
+        System.out.print("Set store location : ");
+        String location = scan.nextLine();
+        setStoreDetails(name,location);
+        while (true){
+            System.out.print("Enter 1 to add products : \nEnter 2 to view the details of the product : \nEnter 3 to Display the Store details \nEnter 4 to exit : ");
+            int choice = scan.nextInt();
+            switch (choice){
+                case 1 -> addProductsToStore();
+                case 2 -> viewProducts();
+                case 3 -> showStoreDetails();
+                case 4 -> System.exit(0);
+				default -> {
+					System.out.println("------------------------");
+					System.out.println("Choose a correct choice");
+					System.out.println("------------------------");
+				}
+
             }
         }
     }
 }
 
-
-class Product {
-    private  int id;
-    private  String name;
-    private  int price;
-    private  String quality;
-
-    Product(int id, String name, int price, String quality) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quality = quality;
-    }
-
-    public void displayAllProducts(){
-        System.out.println("The Product details \nName : "+name+"\nId : "+id+"\nPrice : "+ price +"\nQuality : "+quality);
-    }
-}
-
-
-class SimpleInventory {
-    public static void main(String[] args) {
-        Store.setStoreDetails("tech","Mumbatan");
-        Store.displayStoreDetails();
-        Store st1 =new Store();
-
-        Product p1 = new Product(1,"button",541,"Good");
-        Product p2 = new Product(2,"cases",20,"Bad");
-
-        st1.addProduct(p1);
-        st1.addProduct(p2);
-        st1.displayAll();
-    }
-}
 
 // Qn 6
 
