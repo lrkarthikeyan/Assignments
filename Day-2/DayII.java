@@ -669,7 +669,7 @@ class SumAsString {
 
 class FindingAlphabets {
     public static void main(String[] args) {
-        String str = "ZY";
+        String str = "A";
         int j = 1;
         HashMap<Character,Integer> set = new HashMap<>();
         for(int i = 65;i<=90;i++){
