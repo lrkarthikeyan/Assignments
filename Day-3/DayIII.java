@@ -359,3 +359,279 @@ class BasicCalculator {
         }
     }
 }
+
+
+// Qn - 7 
+
+class MyString {
+
+    private char[] ch;
+    private int length = 0;
+    MyString(String s){
+        try {
+            while (true){
+                s.charAt(length);
+                length++;
+            }
+        }
+        catch (Exception e){
+            ch = new char[length];
+            for(int i = 0;i<length;i++){
+                ch[i] = s.charAt(i);
+            }
+        }
+    }
+
+    int length(){
+        return length;
+    }
+
+    char charAt(int index){
+        if(index<0 || index>=length) return '-';
+        return ch[index];
+    }
+
+    boolean equals(String other){
+        int otherLength = 0;
+        try {
+            while (true){
+                other.charAt(otherLength);
+                otherLength++;
+            }
+        }
+        catch (Exception e){
+            if(ch.length!=otherLength){
+                return false;
+            }
+            else{
+                for(int i = 0;i<otherLength;i++){
+                    if(ch[i]!=other.charAt(i)){
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    }
+
+    String  toUpperCase(){
+        String newOne = "";
+        for(int i = 0;i<length;i++){
+            if(ch[i]>=97 && ch[i]<=122){
+                newOne += (char)(ch[i] - 32);
+            }
+            else{
+                newOne += ch[i];
+            }
+        }
+        return newOne;
+    }
+
+    String toLowerCase(){
+        String newOne = "";
+        for(int i = 0;i<length;i++){
+            if(ch[i]>=65 && ch[i]<=90){
+                newOne += (char)(ch[i] + 32);
+            }
+            else{
+                newOne += ch[i];
+            }
+        }
+        return newOne;
+    }
+
+    String subString(int start, int end){
+        String subString = "";
+        if(end>length || start<0){
+            if(end>=length) return "Index will be out of bound";
+            else return "There ain't a index less than 0 ";
+        }
+        else{
+            for(int i = start;i<end;i++){
+                subString += ch[i];
+            }
+            return "The Substring is "+subString;
+        }
+    }
+
+    String concat(String other){
+        String newOne = "";
+        int otherLength = 0;
+        for(int i = 0;i<length;i++){
+            newOne += ch[i];
+        }
+        try {
+            while (true){
+                other.charAt(otherLength);
+                otherLength++;
+            }
+        }
+        catch (Exception e){
+            for(int i=0;i<otherLength;i++){
+                newOne+=other.charAt(i);
+            }
+            return newOne;
+        }
+    }
+
+    boolean contains(String subString){
+        int otherLength = 0;
+        try {
+            while (true){
+                subString.charAt(otherLength);
+                otherLength++;
+            }
+        }
+        catch (Exception e){
+            if(otherLength>length){
+                return false;
+            }
+            else{
+                for(int i = 0;i<=length-otherLength;i++){
+                    int j = 0;
+                    if(ch[i]==subString.charAt(j)){
+                        int temp = i;
+                        int count = 0;
+                        try{
+                            while (ch[temp]==subString.charAt(j) && count<otherLength){
+                                temp++;
+                                count++;
+                                j++;
+                            }
+                        }
+                        catch (Exception k){
+                            if(count==otherLength){
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+    }
+
+    int indexOf(char c){
+        for(int i = 0;i<length;i++){
+            if(ch[i]==c) return i;
+        }
+        return -1;
+    }
+
+    String replace(char oldChar, char newChar){
+        String newOne = "";
+        for(int i = 0;i<length;i++){
+            if(ch[i]==oldChar) newOne += newChar;
+            else newOne += ch[i];
+        }
+        for(int i = 0;i<length;i++){
+            ch[i] = newOne.charAt(i);
+        }
+        return newOne;
+    }
+    String ourString(){
+        String ans = "";
+        for(char cha : ch){
+            ans+=cha;
+        }
+        return ans;
+    }
+
+}
+
+class MainForMyString {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter a String : ");
+        String str = scan.nextLine();
+        MyString newString = new MyString(str);
+        while (true){
+            System.out.println("These are the options ");
+            System.out.println("1 for length ");
+            System.out.println("2 for return character from a specific index ");
+            System.out.println("3 for check two strings are equal ");
+            System.out.println("4 to make String to Uppercase ");
+            System.out.println("5 to make the String to lowercase ");
+            System.out.println("6 to return a substring ");
+            System.out.println("7 to suffix concatenate with another string ");
+            System.out.println("8 to check if the String contains the substring ");
+            System.out.println("9 to find the first occurrence of a character");
+            System.out.println("10 to replace a character from your String ");
+            System.out.println("11 to show your String ");
+            System.out.print("12 to exit ");
+            int choice = scan.nextInt();
+            switch (choice){
+                case 1 -> System.out.println("The length of your string is : "+newString.length());
+                case 2 -> {
+                    System.out.print("Enter the index value : ");
+                    int index = scan.nextInt();
+                    char ch = newString.charAt(index);
+                    if(ch=='-'){
+                        System.out.println("The index is greater or less than your actual string ");
+                    }
+                    else{
+                        System.out.println("The char at the index is "+ch);
+                    }
+                }
+                case 3 -> {
+                    scan.nextLine();
+                    System.out.print("Enter the new String : ");
+                    String newOne = scan.nextLine();
+                    String ans = newString.equals(newOne) ? "Both are same:)" : "Not same :(";
+                    System.out.println(ans);
+                }
+                case 4 -> System.out.println("The Uppercase of your String is : "+newString.toUpperCase());
+                case 5 -> System.out.println("The Lowercase of your String is : "+newString.toLowerCase());
+                case 6 -> {
+                    System.out.print("Enter the start index : ");
+                    int start = scan.nextInt();
+                    System.out.print("Enter the end index : ");
+                    int end = scan.nextInt();
+                    System.out.println(newString.subString(start,end));
+                    }
+                case 7 -> {
+                    scan.nextLine();
+                    System.out.print("Enter the new String you wanna concatenate : ");
+                    String gonnaAdd = scan.nextLine();
+                    System.out.println("The Concatenation of your String is : "+newString.concat(gonnaAdd));
+                }
+                case 8 -> {
+                    scan.nextLine();
+                    System.out.print("Enter the substring you wanna check : ");
+                    String check = scan.nextLine();
+                    boolean br = newString.contains(check);
+                    if(br){
+                        System.out.println("Its a substring of the old string ");
+                    }
+                    else{
+                        System.out.println("This ain't a substring of that one ");
+                    }
+                }
+                case 9 -> {
+                    scan.nextLine();
+                    System.out.print("Give the character : ");
+                    char check = scan.nextLine().charAt(0);
+                    int ans = newString.indexOf(check);
+                    if(ans==-1){
+                        System.out.println("The character ain't in the String");
+                    }
+                    else{
+                        System.out.println("The character's first index is at :"+ans);
+                    }
+                }
+                case 10 -> {
+                    scan.nextLine();
+                    System.out.print("Enter the character you wanna replace : ");
+                    char replace = scan.nextLine().charAt(0);
+                    System.out.print("Which character you wanna insert at the old char's place :");
+                    char newChar = scan.nextLine().charAt(0);
+                    System.out.println("The new String is "+newString.replace(replace,newChar));
+                }
+                case 11 -> System.out.println("Our string is : "+newString.ourString());
+                case 12 -> System.exit(0);
+                default -> System.out.println("Choose a right choice!");
+            }
+			System.out.println();
+        }
+    }
+}
