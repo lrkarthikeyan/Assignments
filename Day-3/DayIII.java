@@ -236,124 +236,82 @@ class EmployeesList {
 //Qn 8
 
 class AdvancedCalculator extends BasicCalculator{
-    public static double power(int base, int exponent){
+    public double power(double base, double exponent){
         return Math.pow(base,exponent);
     }
-    public static int modulus(int num1,int num2){
+    public double modulus(double num1,double num2){
         return num1%num2;
     }
-    public static double squareRoot(double num, int b){
+    public double squareRoot(double num){
         return Math.sqrt(num);
     }
 }
 
 class ScientificFunction extends AdvancedCalculator{
-    public static double sin(double angle){
+    public double sin(double angle){
         return Math.sin(angle);
     }
-    public static double cos(double angle){
+    public double cos(double angle){
         return Math.cos(angle);
     }
-    public static double log(double value){
+    public double log(double value){
         return Math.log(value);
     }
-    public static double exp(double value){
+    public double exp(double value){
         return Math.exp(value);
     }
 }
 
 class BasicCalculator {
-    public static int add(int num1,int num2){
+    public double add(double num1,double num2){
         return num1+num2;
     }
-    public static int sub(int num1,int num2){
+    public double sub(double num1,double num2){
         return num1-num2;
     }
-    public static int mul(int num1,int num2){
+    public double mul(double num1,double num2){
         return num1*num2;
     }
-    public static int div(int num1,int num2){
+    public double div(double num1,double num2){
         return num1/num2;
     }
+}
+
+class MainForCalculator{
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+		ScientificFunction bc = new ScientificFunction();
+		double a = 0;
+		double b = 0;
         while (true){
             System.out.println("Math functions \n1. Addition \n2. Subtraction \n3. Multiply \n4. Division \n5. Power \n6. Modulus \n7. SquareRoot \n8. Sin \n9. Cos \n10. Log \n11. Exponential \n12. Exit");
             int choice = scan.nextInt();
-
+			switch(choice){
+				case 1,2,3,4,5,6 -> {
+					System.out.print("Enter num 1 : ");
+                    a = scan.nextDouble();
+                    System.out.print("Enter num 2 : ");
+                    b = scan.nextDouble();
+				}
+				case 7,8,9,10,11 -> {
+					System.out.print("Enter num : ");
+                    a = scan.nextDouble();
+				}
+			}
             switch (choice){
-                case 1 -> {
-                    System.out.print("Enter num 1 : ");
-                    int a = scan.nextInt();
-                    System.out.print("Enter num 2 : ");
-                    int b = scan.nextInt();
-                    System.out.println("The addition of two nums "+add(a,b));;
-                }
-                case 2 -> {
-                    System.out.print("Enter num 1 : ");
-                    int a = scan.nextInt();
-                    System.out.print("Enter num 2 : ");
-                    int b = scan.nextInt();
-                    System.out.println("The subtraction of two nums "+sub(a,b));;
-                }
-                case 3 -> {
-                    System.out.print("Enter num 1 : ");
-                    int a = scan.nextInt();
-                    System.out.print("Enter num 2 : ");
-                    int b = scan.nextInt();
-                    System.out.println("The multiplication of two nums "+mul(a,b));;
-                }
-                case 4 -> {
-                    System.out.print("Enter num 1 : ");
-                    int a = scan.nextInt();
-                    System.out.print("Enter num 2 : ");
-                    int b = scan.nextInt();
-                    System.out.println("The division of two nums "+div(a,b));;
-                }
-                case 5 -> {
-                    System.out.print("Enter num 1 : ");
-                    int a = scan.nextInt();
-                    System.out.print("Enter num 2 : ");
-                    int b = scan.nextInt();
-                    System.out.println("The Power num is "+AdvancedCalculator.power(a,b));;
-                }
-                case 6 -> {
-                    System.out.print("Enter num 1 : ");
-                    int a = scan.nextInt();
-                    System.out.print("Enter num 2 : ");
-                    int b = scan.nextInt();
-                    System.out.println("The modulus of two nums "+AdvancedCalculator.modulus(a,b));;
-                }
-                case 7 -> {
-                    System.out.print("Enter num 1 : ");
-                    int a = scan.nextInt();
-                    System.out.print("Enter num 2 : ");
-                    int b = scan.nextInt();
-                    System.out.println("The Square root of two nums "+AdvancedCalculator.squareRoot(a,b));;
-                }
-                case 8 -> {
-                    System.out.print("Enter num : ");
-                    double a = scan.nextInt();
-                    System.out.println("The sine  "+ScientificFunction.sin(a));;
-                }
-                case 9 -> {
-                    System.out.print("Enter num : ");
-                    double a = scan.nextInt();
-                    System.out.println("The cos  "+ScientificFunction.cos(a));;
-                }
-                case 10 -> {
-                    System.out.print("Enter num : ");
-                    double a = scan.nextInt();
-                    System.out.println("The log  "+ScientificFunction.log(a));;
-                }
-                case 11 -> {
-                    System.out.print("Enter num : ");
-                    double a = scan.nextInt();
-                    System.out.println("The exponent  "+ScientificFunction.exp(a));;
-                }
-                case 12 -> {
-                    System.exit(0);
-                }
+                case 1 -> System.out.println("The addition of two nums "+bc.add(a,b));
+               
+                case 2 -> System.out.println("The subtraction of two nums "+bc.sub(a,b));
+                case 3 -> System.out.println("The multiplication of two nums "+bc.mul(a,b));
+                case 4 -> System.out.println("The division of two nums "+bc.div(a,b));
+                case 5 -> System.out.println("The Power num is "+bc.power(a,b));
+                case 6 -> System.out.println("The modulus of two nums "+bc.modulus(a,b));
+                case 7 -> System.out.println("The Square root of two nums "+bc.squareRoot(a));
+                case 8 -> System.out.println("The sine  "+bc.sin(a));
+                case 9 -> System.out.println("The cos  "+bc.cos(a));
+                case 10 -> System.out.println("The log  "+bc.log(a));
+                case 11 -> System.out.println("The exponent  "+bc.exp(a));
+                case 12 -> System.exit(0);
                 default -> System.out.println("That option isn't available yet");
             }
         }
