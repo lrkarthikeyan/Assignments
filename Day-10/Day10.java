@@ -9,6 +9,10 @@ import java.util.Random;
 import java.util.PriorityQueue;	
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+import java.util.*;
 
 /*Qn -1 Write a Java program
 a. to create a new array list, add some colours (string) and print out the collection.
@@ -84,6 +88,61 @@ class ArrayListProgram {
         }
     }
 }
+
+/* Qn - 2 Write a Java program to,
+a. append the specified element to the end of a linked list.
+b. iterate through all elements in a linked list.
+c. iterate through all elements in a linked list starting at the specified position.
+d. iterate a linked list in reverse order.
+e. insert the specified element at the specified position in the linked list.
+f. insert elements into the linked list at the first and last position.
+g. insert the specified element at the front of a linked list.
+h. insert the specified element at the end of a linked list.
+i. insert some elements at the specified position into a linked list.
+j. get the first and last occurrence of the specified elements in a linked list.*/
+
+class LinkedListProgram {
+    public static void main(String[] args) {
+        LinkedList<Integer> ls = new LinkedList<>();
+        //a
+        ls.addLast(0);
+        //b
+        for(int i = 1;i<10;i++){
+            ls.addLast(i);
+        }
+        for(Integer i : ls){
+            System.out.print(i+" ");
+        }
+        System.out.println();
+        //c
+        ListIterator<Integer> li = ls.listIterator(5);
+        while (li.hasNext()){
+            System.out.println(li.next());
+        }
+        //d
+        Iterator<Integer> rit = ls.descendingIterator();
+        while (rit.hasNext()){
+            System.out.print(rit.next()+ " ");
+        }
+        System.out.println();
+        //e
+        ls.add(7,55);
+        //f
+        ls.addFirst(20);
+        ls.addLast(100);
+        //g
+        ls.add(0,2000);
+        //h
+        int index = ls.size();
+        ls.add(index-1,3000);
+        //i
+        ls.add(9,5000);
+        //j
+        System.out.println(ls.indexOf(4));
+        System.out.println(ls.lastIndexOf(8));
+    }
+}
+
 
 /*Qn - 3 Write a Java program to,
 a. append the specified element to the end of a hash set.
@@ -444,6 +503,46 @@ class PriorityQueueProgram {
     }
 }
 
+/*Qn - 6 */
+
+class TreeMapProblem {
+    public static void main(String[] args) {
+        TreeMap<Integer,Character> tm = new TreeMap<>();
+        //a.
+        for(int i = 0;i<10;i++){
+            tm.put(i+1, (char) (i+65));
+        }
+        //b.
+        TreeMap<Integer,Character> tm1 = new TreeMap<>(tm);
+        //c.
+        tm.containsKey(5);
+        //d.
+        tm.containsValue('F');
+        //e.
+        System.out.println(tm.keySet());
+        //f.
+        tm.clear();
+        //g.
+        TreeMap<Integer, Character> tm2 = new TreeMap<>((a, b) -> b - a);
+        tm2.putAll(tm1);
+        //h.
+        Map.Entry<Integer, Character> highestEntry = tm1.lastEntry();
+        Map.Entry<Integer, Character> lowestEntry = tm1.firstEntry();
+        System.out.println("Lowest entry: " + lowestEntry);
+        System.out.println("Highest entry: " + highestEntry);
+
+        //i.
+        Integer firstKey = tm1.firstKey();
+        Integer lastKey = tm1.lastKey();
+        System.out.println("First key: " + firstKey + ", Last key: " + lastKey);
+
+        //j.
+        NavigableSet<Integer> reversedKeys = tm1.descendingKeySet();
+        System.out.println("Keys in reverse order: " + reversedKeys);
+    }
+}
+
+
 /*Qn - 7. Write a Java program to,
     1. associate the specified value with the specified key in a HashMap.
     2. count the number of key-value (size) mappings in a map.
@@ -516,5 +615,65 @@ class HashMapProgram {
         //j.
         System.out.println("The key 5 value is : "+map.get(5));
         System.out.println("---------------");
+    }
+}
+
+/*Qn - 8 */
+
+class Account {
+    private int accountNumber;
+    private String holderName;
+    private Double balance;
+
+    public Account(int accountNumber, String holderName, double balance) {
+        this.accountNumber = accountNumber;
+        this.holderName = holderName;
+        this.balance = balance;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+}
+
+class AccountHolder {
+    public static void main(String[] args) {
+        ArrayList<Account> accounts = new ArrayList<>();
+        accounts.add(new Account(1001, "Alice", 5000.0));
+        accounts.add(new Account(1002, "Bob", 12000.0));
+        accounts.add(new Account(1003, "Charlie", 7500.0));
+
+        double interestRatePrimitive = 0.05;
+        Double interestRate = Double.valueOf(interestRatePrimitive);
+
+        for (Account acc : accounts) {
+            System.out.println("Holder Name: " + acc.getHolderName());
+            System.out.println("Account Number: " + acc.getAccountNumber());
+            System.out.println("Original Balance: " + acc.getBalance());
+
+            double balance = acc.getBalance();
+            double rateUnboxed = interestRate.doubleValue();
+
+            double interest = balance * rateUnboxed;
+            balance += interest;
+
+            acc.setBalance(balance);
+
+            System.out.println("New Balance with 5% interest: " + balance);
+            System.out.println("-----------------------------");
+        }
     }
 }
