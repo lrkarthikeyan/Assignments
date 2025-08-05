@@ -503,45 +503,78 @@ class PriorityQueueProgram {
     }
 }
 
-/*Qn - 6 */
+/*Qn - 6 6. Write a Java program to,
+    1. associate the specified value with the specified key in a Tree Map.
+    2. copy a Tree Map content to another Tree Map.
+    3. search a key in a Tree Map.
+    4. search a value in a Tree Map.
+    5. get all keys from the given a Tree Map.
+    6. delete all elements from a given Tree Map.
+    7. sort keys in Tree Map by using comparator.
+    8. get a key-value mapping associated with the greatest key and the least key in a map.
+    9. get the first (lowest) key and the last (highest) key currently in a map.
+    10. get a reverse order view of the keys contained in a given map. */
 
-class TreeMapProblem {
+class TreeMapProgram {
     public static void main(String[] args) {
         TreeMap<Integer,Character> tm = new TreeMap<>();
-        //a.
         for(int i = 0;i<10;i++){
-            tm.put(i+1, (char) (i+65));
+            tm.put(i+1,(char) (i+65));
         }
-        //b.
+        //a.
+        System.out.println("The treemap is created : "+tm);
         TreeMap<Integer,Character> tm1 = new TreeMap<>(tm);
+        //b.
+        System.out.println("New Treemap created by coping the old one : "+tm1);
+        Scanner scan = new Scanner(System.in);
         //c.
-        tm.containsKey(5);
+        System.out.print("Enter a key value (int)  to check if it present in the tree map : ");
+        try{
+            int key = scan.nextInt();
+            boolean isIn = tm.containsKey(key);
+            String str = isIn ? "Yes the key is in the map " : "No it ain't in the map ";
+            System.out.println(str);
+            System.out.println();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         //d.
-        tm.containsValue('F');
+        scan.nextLine();
+        System.out.print("Enter a value to search in the map (char) : ");
+        try{
+            char ch = scan.nextLine().charAt(0);
+            boolean isIn = tm.containsValue(ch);
+            String str = isIn ? "Yes the value is in the map  " : "No it ain't in the map";
+            System.out.println(str);
+            System.out.println();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         //e.
-        System.out.println(tm.keySet());
+        System.out.println("The whole keyset is : "+tm.keySet());
         //f.
         tm.clear();
+        System.out.println("Deleted the first treemap ");
         //g.
-        TreeMap<Integer, Character> tm2 = new TreeMap<>((a, b) -> b - a);
-        tm2.putAll(tm1);
+        System.out.println("We can't do the sorting in descending as an existing treemap so lets create a new one ");
+        Comparator<Integer> cm = (a,b)->b-a;
+        TreeMap<Integer,Character> tm2 = new TreeMap<>(cm);
+        for(int i = 0;i<10;i++){
+            tm2.put(i+1,(char) (i+65));
+        }
+        System.out.println("The descending order sorting of the new tree map is : "+tm2);
         //h.
-        Map.Entry<Integer, Character> highestEntry = tm1.lastEntry();
-        Map.Entry<Integer, Character> lowestEntry = tm1.firstEntry();
-        System.out.println("Lowest entry: " + lowestEntry);
-        System.out.println("Highest entry: " + highestEntry);
-
+        System.out.println("The map's first entry is "+tm1.firstEntry()+" and the last key is "+tm1.lastEntry());
         //i.
-        Integer firstKey = tm1.firstKey();
-        Integer lastKey = tm1.lastKey();
-        System.out.println("First key: " + firstKey + ", Last key: " + lastKey);
-
+        int leastKey = tm1.firstKey();
+        int higherKey = tm1.lastKey();
+        System.out.println("The first key is : "+leastKey+" And the last key is : "+higherKey);
         //j.
-        NavigableSet<Integer> reversedKeys = tm1.descendingKeySet();
-        System.out.println("Keys in reverse order: " + reversedKeys);
+        NavigableSet<Integer> keyStore = tm1.descendingKeySet();
+        System.out.println("The reversed set is "+keyStore);
     }
-}
 
+}
 
 /*Qn - 7. Write a Java program to,
     1. associate the specified value with the specified key in a HashMap.
@@ -621,13 +654,14 @@ class HashMapProgram {
 /*Qn - 8 */
 
 class Account {
-    private int accountNumber;
-    private String holderName;
-    private Double balance;
 
-    public Account(int accountNumber, String holderName, double balance) {
+    private int accountNumber;
+    private String accountHolder;
+    private double balance;
+
+    public Account(int accountNumber, String accountHolder, double balance) {
         this.accountNumber = accountNumber;
-        this.holderName = holderName;
+        this.accountHolder = accountHolder;
         this.balance = balance;
     }
 
@@ -635,45 +669,48 @@ class Account {
         return accountNumber;
     }
 
-    public String getHolderName() {
-        return holderName;
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public Double getBalance() {
+    public String getAccountHolder() {
+        return accountHolder;
+    }
+
+    public void setAccountHolder(String accountHolder) {
+        this.accountHolder = accountHolder;
+    }
+
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
 }
 
-class AccountHolder {
+class Bank {
     public static void main(String[] args) {
-        ArrayList<Account> accounts = new ArrayList<>();
-        accounts.add(new Account(1001, "Alice", 5000.0));
-        accounts.add(new Account(1002, "Bob", 12000.0));
-        accounts.add(new Account(1003, "Charlie", 7500.0));
-
-        double interestRatePrimitive = 0.05;
-        Double interestRate = Double.valueOf(interestRatePrimitive);
-
-        for (Account acc : accounts) {
-            System.out.println("Holder Name: " + acc.getHolderName());
-            System.out.println("Account Number: " + acc.getAccountNumber());
-            System.out.println("Original Balance: " + acc.getBalance());
-
-            double balance = acc.getBalance();
-            double rateUnboxed = interestRate.doubleValue();
-
-            double interest = balance * rateUnboxed;
-            balance += interest;
-
-            acc.setBalance(balance);
-
-            System.out.println("New Balance with 5% interest: " + balance);
-            System.out.println("-----------------------------");
+        Account a1 = new Account(1524,"Malai",5241.55);
+        Account a2 = new Account(1486,"Klaus",63985);
+        Account a3 = new Account(65874,"Elijah",698745);
+        ArrayList<Account> arr = new ArrayList<>();
+        arr.add(a1);
+        arr.add(a2);
+        arr.add(a3);
+        for(Account i : arr){
+            System.out.println("The User name : "+i.getAccountHolder());
+            System.out.println("The Account number : "+i.getAccountNumber());
+            System.out.println("The Original balance : "+i.getBalance());
+            Double interest = Double.valueOf(5.0/100);
+            Double oldBalance = i.getBalance();
+            double newInterest = interest;
+            double newBalance = oldBalance.doubleValue();
+            double finalAmount = oldBalance +(newInterest * newBalance);
+            System.out.println("The new Balance is : "+finalAmount);
+            System.out.println();
         }
     }
 }
