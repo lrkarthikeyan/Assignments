@@ -570,8 +570,7 @@ class TreeMapProgram {
         int higherKey = tm1.lastKey();
         System.out.println("The first key is : "+leastKey+" And the last key is : "+higherKey);
         //j.
-        NavigableSet<Integer> keyStore = tm1.descendingKeySet();
-        System.out.println("The reversed set is "+keyStore);
+        System.out.println("The reversed set is "+tm1.descendingKeySet());
     }
 
 }
